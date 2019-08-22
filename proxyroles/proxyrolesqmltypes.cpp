@@ -1,3 +1,4 @@
+
 #include "proxyrole.h"
 #include "joinrole.h"
 #include "switchrole.h"
@@ -18,6 +19,8 @@ void registerProxyRoleTypes() {
     qmlRegisterType<FilterRole>("SortFilterProxyModel", 0, 2, "FilterRole");
 }
 
+#ifndef SORT_FILTER_PROXY_MODEL_LIBRARY_BUILD
 Q_COREAPP_STARTUP_FUNCTION(registerProxyRoleTypes)
+#endif
 
 }

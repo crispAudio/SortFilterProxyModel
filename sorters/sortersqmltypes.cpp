@@ -16,6 +16,8 @@ void registerSorterTypes() {
     qmlRegisterType<ExpressionSorter>("SortFilterProxyModel", 0, 2, "ExpressionSorter");
 }
 
+#ifndef SORT_FILTER_PROXY_MODEL_LIBRARY_BUILD
 Q_COREAPP_STARTUP_FUNCTION(registerSorterTypes)
+#endif
 
 }
