@@ -10,7 +10,7 @@ find_package(Qt5 REQUIRED
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON) # This is to find generated *.moc and *.h files in build dir
 
-add_library(SortFilterProxyModel OBJECT
+add_library(SortFilterProxyModel STATIC
     qqmlsortfilterproxymodel.cpp
     filters/filter.cpp
     filters/filtercontainer.cpp
