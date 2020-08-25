@@ -2,6 +2,12 @@
 #include "filter.h"
 #include <QtQml>
 
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 9, 0))
+    #define WARN(X, Y) qmlWarning(X) << Y;
+#else
+    #define WARN(X, Y) qWarning() << X << Y;
+#endif // QT_VERSION >= 5.9
+
 namespace qqsfpm {
 
 /*!
@@ -78,7 +84,7 @@ FilterContainerAttached::FilterContainerAttached(QObject* object) : QObject(obje
     m_filter(qobject_cast<Filter*>(object))
 {
     if (!m_filter)
-        qmlWarning(object) << "FilterContainer must be attached to a Filter";
+        WARN(object, "FilterContainer must be attached to a Filter");
 }
 
 FilterContainerAttached::~FilterContainerAttached()
@@ -106,7 +112,7 @@ void FilterContainerAttached::setContainer(QObject* object)
 
     FilterContainer* container = qobject_cast<FilterContainer*>(object);
     if (object && !container)
-        qmlWarning(parent()) << "container must inherits from FilterContainer, " << object->metaObject()->className() << " provided";
+        WARN(parent(), "container must inherits from FilterContainer, " << object->metaObject()->className() << " provided");
 
     if (m_container && m_filter)
         qobject_cast<FilterContainer*>(m_container.data())->removeFilter(m_filter);

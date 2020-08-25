@@ -2,6 +2,12 @@
 #include "sorter.h"
 #include <QtQml>
 
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 9, 0))
+    #define WARN(X, Y) qmlWarning(X) << Y;
+#else
+    #define WARN(X, Y) qWarning() << X << Y;
+#endif // QT_VERSION >= 5.9
+
 namespace qqsfpm {
 
 /*!
@@ -78,7 +84,7 @@ SorterContainerAttached::SorterContainerAttached(QObject* object) : QObject(obje
     m_sorter(qobject_cast<Sorter*>(object))
 {
     if (!m_sorter)
-        qmlWarning(object) << "SorterContainerAttached must be attached to a Sorter";
+        WARN(object, "SorterContainerAttached must be attached to a Sorter");
 }
 
 SorterContainerAttached::~SorterContainerAttached()
@@ -106,7 +112,7 @@ void SorterContainerAttached::setContainer(QObject* object)
 
     SorterContainer* container = qobject_cast<SorterContainer*>(object);
     if (object && !container)
-        qmlWarning(parent()) << "container must inherits from SorterContainer, " << object->metaObject()->className() << " provided";
+        WARN(parent(), "container must inherits from SorterContainer, " << object->metaObject()->className() << " provided");
 
     if (m_container && m_sorter)
         qobject_cast<SorterContainer*>(m_container.data())->removeSorter(m_sorter);
