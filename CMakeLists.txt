@@ -49,4 +49,3 @@ target_include_directories(SortFilterProxyModel PUBLIC
     )
 
 set_property(TARGET SortFilterProxyModel PROPERTY POSITION_INDEPENDENT_CODE ON)
-qt5_use_modules(SortFilterProxyModel Core Qml)
